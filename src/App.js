@@ -13,12 +13,20 @@ class App extends Component {
   }
   //updateCourse
   updateCourse = (e) => {
-    console.log(e.target.value)
+    this.setState ({
+      current: e.target.value
+    })
   }
   //addCourse
   addCourse = (e) => {
     e.preventDefault();
-    console.log("Course Add")
+    let current = this.state.current;
+    let courses = this.state.courses;
+    courses.push({name: current})
+    this.setState({
+      courses,          //courses: courses  
+      current:''
+    })
   }
 
   render() {
@@ -29,7 +37,7 @@ class App extends Component {
   return (
     <section className="App">
     <h2>Add Course</h2>
-    <CourseForm updateCourse={this.updateCourse} addCourse={this.addCourse} />
+    <CourseForm current={this.state.current} updateCourse={this.updateCourse} addCourse={this.addCourse} />
     <ul>{courseList}</ul>
     </section>
     );
